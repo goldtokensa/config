@@ -3,7 +3,7 @@
 This repository contains the configuration files for the DGLD blockchain on the Ocean platform. This configuration defines the public keys and permissions that control the chain, and the binding to the Bitcoin blockchain via the Mainstay protocol. 
 
 To run a fully validating DGLD node and connect to the network, please download the Ocean blockchain client from the CommerceBlock Github [here](https://github.com/commerceblock/ocean/releases). 
-The client must be run with the configuration for the DGLD blockchain which is in the `ocean` directory (specified with the `-datadir=path` argument on the client node).
+The client must be run with the configuration for the DGLD blockchain which is in the `ocean` directory (specified with the `-datadir=path` argument on the client node). To run via script execute `./ocean.sh` from `config/binaries` directory.
 
 Alternatively, a DGLD node can be launched from a Docker image (`docker/docker-compose.yml`). 
 
