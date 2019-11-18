@@ -2,7 +2,7 @@
 version: '3.6'
 services:
   public:
-    image: commerceblock/ocean:9717d4aa8
+    image: commerceblock/ocean:be0a72410
     networks:
       - default
     ports:
