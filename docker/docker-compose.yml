@@ -2,7 +2,7 @@
 version: '3.6'
 services:
   public:
-    image: commerceblock/ocean:be0a72410
+    image: commerceblock/ocean:43242e91c
     networks:
       - default
     ports:
@@ -20,8 +20,11 @@ services:
         -rpcallowip=0.0.0.0/0
         -txindex=1
         -listen=1
-        -connect=mainnet.gtsa.io
+        -addnode=mainnet.gtsa.io
         -contractintx=1
+        -pkhwhitelist=1
+        -burnlist=1
+        -freezelist=1
         -issuanceblock=1
         -fixedtxfee=50000
         -genesistimestamp=1568700000
