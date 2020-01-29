@@ -2,14 +2,14 @@
 version: '3.6'
 services:
   public:
-    image: commerceblock/ocean:be0a72410
+    image: commerceblock/ocean:43242e91c
     networks:
       - default
     ports:
       - "8332:8332"
       - "7042:7042"
     volumes:
-      - ./ocean:/home/bitcoin/.bitcoin
+      - ../ocean:/home/bitcoin/.bitcoin
     command: >-
       oceand
         -printtoconsole

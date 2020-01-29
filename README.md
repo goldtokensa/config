@@ -1,13 +1,17 @@
 # DGLD configuration
 
-This repository contains the configuration files for the DGLD blockchain on the Ocean platform. This configuration defines the public keys and permissions that control the chain, and the binding to the Bitcoin blockchain via the Mainstay protocol. 
+This repository contains the configuration files for the DGLD blockchain on the Ocean platform. This configuration defines the public keys and permissions that control the chain, and the binding to the Bitcoin blockchain via the Mainstay protocol.
 
 To run a fully validating DGLD node and connect to the network, please download the Ocean blockchain client from the CommerceBlock Github [here](https://github.com/commerceblock/ocean/releases). 
 The client must be run with the configuration for the DGLD blockchain which is in the `ocean` directory (specified with the `-datadir=path` argument on the client node). To run via script execute `./ocean.sh` from `config/binaries` directory.
 
-Alternatively, a DGLD node can be launched from a Docker image (`docker/docker-compose.yml`). 
+With your DGLD configured Ocean node up and running you can run a Guardnode instance alongside by executing the `./guardnode.sh` script.
 
-The `ocean.conf` file along with the network terms-and-conditions (`latest.txt`) file determine the genesis block and permissions for the DGLD blockchain. 
+Alternatively, a DGLD node can be launched from a Docker image located in `config/mainnet/docker`, or for a DGLD node and Guardnode in a single docker file `config/mainnet/docker/guardnode`.
+
+DGLD testnet configurations can be found in `config/testnet`.
+
+The `ocean/ocean.conf` file along with the network terms-and-conditions (`latest.txt`) file determine the genesis block and permissions for the DGLD blockchain. 
 
 The hash of genesis block of the DGLD blockchain is: `c66cb6eb7cd585788b294be28c8dcd6be4e37a0a6d238236b11c0beb25833bb9`
 
