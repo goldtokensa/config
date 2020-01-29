@@ -1,0 +1,56 @@
+---
+version: '3.6'
+services:
+  guardnode:
+    image: commerceblock/guardnode:latest
+    volumes:
+      - ../../ocean:/home/bitcoin/.bitcoin
+    command: >-
+      python3 -m guardnode
+        --rpcuser ${OCEAN_RPC_USER:-ocean}
+        --rpcpass ${OCEAN_RPC_PASSWORD:-oceanpass}
+        --rpchost ocean:8332
+        --servicerpcuser ${OCEAN_RPC_USER:-ocean}
+        --servicerpcpass ${OCEAN_RPC_PASSWORD:-oceanpass}
+        --servicerpchost ocean:8332
+        --bidlimit 50
+        --challengehost https://coordinator.gtsa.io:443
+        --nodelogfile /home/bitcoin/.bitcoin/gold_main/debug.log
+    depends_on:
+      - ocean
+  ocean:
+    image: commerceblock/ocean:43242e91c
+    networks:
+      - default
+    ports:
+      - "8332:8332"
+      - "7042:7042"
+    volumes:
+      - ../../ocean:/home/bitcoin/.bitcoin
+    command: >-
+      oceand
+        -printtoconsole
+        -chain=gold_main
+        -rpcuser=${OCEAN_RPC_USER:-ocean}
+        -rpcpassword=${OCEAN_RPC_PASS:-oceanpass}
+        -rpcport=8332
+        -rpcallowip=0.0.0.0/0
+        -txindex=1
+        -listen=1
+        -connect=mainnet.gtsa.io
+        -contractintx=1
+        -issuanceblock=1
+        -fixedtxfee=50000
+        -genesistimestamp=1568700000
+        -policycoins=2100000000000000
+        -signblockscript=5321024cc60ff6ca8423c8353142fab8b4aa8b42e66eac2ae51a7cde1eaeb54a73a31e21034878127e5f0a5c84e775d754f02bcea9393c17b7fc05a01a2c011f7a419e6f932103b7d99275aba3db614faeeba3920295e8d661a3a0a705d999b8a38aca0f8fc5d321039d1175c43f855f003fd1e980b618b3d504f2099754b8afa3667ead04b9dbb6d921027c2e025fb4d41e7c4b757a722bff6172233fa576b0aac7d5d8e4e32cfbf2a1df55ae
+        -con_mandatorycoinbase=a914c0c2f77663b67e4c6c1b217b5c866095a800839f87
+        -issuecontrolscript=522102103fda45d114931ab5b24b77a383d16c3e510ee83ebf91987436a21e02ad7b6d2102ee4278985ac544f0fec151a1ba21ac97e26fdbf230973e07aeb608ed0a18b5352102d36a30f4eb8abd75550666e263dde3b302d3fce3847a53ec283b670e9a8387bf53ae
+        -issuancecoinsdestination=a914347082861e2c1b1b8b7e6327d49519e2944be00c87
+        -freezelistcoinsdestination=76a9149adc28094c9ad9a772f0267b7e5bec28a8707ae688ac
+        -burnlistcoinsdestination=76a914806c130d123dc671461b096be829753eabc7e14b88ac
+        -whitelistcoinsdestination=76a91464e33e58fa0a18348d94f064a09fe6ec65448ef588ac
+        -challengecoinsdestination=76a914c0b973a960a705286e91feb2cfd08111b65aa82988ac
+        -minrelaytxfee=0.00000060
+        -dustrelayfee=0.00000060
+        -attestationhash=862244710b778def8209ca90be7d697c686d595da4b90acdf6d2f844da1bfd28

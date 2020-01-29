@@ -1,0 +1,45 @@
+---
+version: '3.6'
+services:
+  public:
+    image: commerceblock/ocean:43242e91c
+    networks:
+      - default
+    ports:
+      - "8332:8332"
+      - "7042:7042"
+    volumes:
+      - ../ocean:/home/bitcoin/.bitcoin
+    command: >-
+      oceand
+        -printtoconsole
+        -chain=gold_main
+        -rpcuser=${OCEAN_RPC_USER:-ocean}
+        -rpcpassword=${OCEAN_RPC_PASS:-oceanpass}
+        -rpcport=8332
+        -rpcallowip=0.0.0.0/0
+        -txindex=1
+        -listen=1
+        -connect=public.gtsa.io
+        -pkhwhitelist=1
+        -contractintx=1
+        -freezelist=1
+        -burnlist=1
+        -rescan=0
+        -recordinflation=1
+        -issuanceblock=1
+        -policycoins=2100000000000000
+        -signblockscript=532103041f9d9edc4e494b07eec7d3f36cedd4b2cfbb6fe038b6efaa5f56b9636abd7b21037c06b0c66c98468d64bb43aff91a65c0a576113d8d978c3af191e38845ae5dab21031bd16518d76451e7cf13f64087e4ae4816d08ae1d579fa6c172dcfe4476bd7da210226c839b56b99af781bbb4ce14365744253ae75ffe6f9182dd7b0df95c439537a21023cd2fc00c9cb185b4c0da16a45a1039e16709a61fb22340645790b7d1391b66055ae
+        -con_mandatorycoinbase=76a914ab8a434ed169ee167135231c6c0c45ed3e7c7c5388ac
+        -issuecontrolscript=5221024d3f6f08763b92735a2d500a306bc212281d8107f8e31b9b011d48abe420f6282102441ef52d1923962e44fd86c0bc019dd768988f603d625791a721f855ddcf6320210324405f3350d375edb7b0fb5846a4c794ff0cb76d01e94098a56dd5a6008a8dc153ae
+        -issuancecoinsdestination=a914642845f0dee55cd19cc0c7c22ef7c6e8a7b8506387
+        -freezelistcoinsdestination=76a914730c119f8097bed5e617e0d83051e27414e8089388ac
+        -burnlistcoinsdestination=76a914c78aea0bdc3b85b800c5c9c0c4a95237878005a088ac
+        -whitelistcoinsdestination=76a9144f33907bf3ded16fb263d01dc87cb0119732daf888ac
+        -challengecoinsdestination=76a91475a7df76d9a22341b2139d270d9908a3f823738f88ac
+        -minrelaytxfee=0.00000060
+        -dustrelayfee=0.00000060
+        -wallet=whitelistWallet.dat
+        -attestationhash=db4479c0940eb27b42c02cfa56da64175b38d91015a981d234d1ac9c6a4e1215
+        -fixedtxfee=50000
+
