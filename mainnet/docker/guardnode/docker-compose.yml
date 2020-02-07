@@ -13,7 +13,7 @@ services:
         --servicerpcuser ${OCEAN_RPC_USER:-ocean}
         --servicerpcpass ${OCEAN_RPC_PASSWORD:-oceanpass}
         --servicerpchost ocean-cb:8332
-        --bidlimit 50
+        --bidlimit 50000
         --challengehost https://coordinator.mainnet.gtsa.io:10007
         --nodelogfile /home/bitcoin/.bitcoin/gold_main/debug.log
     depends_on:
