@@ -9,10 +9,10 @@ services:
       python3 -m guardnode
         --rpcuser ${OCEAN_RPC_USER:-ocean}
         --rpcpass ${OCEAN_RPC_PASSWORD:-oceanpass}
-        --rpchost ocean:8332
+        --rpchost ocean:8443
         --servicerpcuser ${OCEAN_RPC_USER:-ocean}
         --servicerpcpass ${OCEAN_RPC_PASSWORD:-oceanpass}
-        --servicerpchost ocean:8332
+        --servicerpchost ocean-cb:8332
         --bidlimit 50
         --challengehost https://coordinator.mainnet.gtsa.io:10007
         --nodelogfile /home/bitcoin/.bitcoin/gold_main/debug.log
@@ -23,17 +23,16 @@ services:
     networks:
       - default
     ports:
-      - "8332:8332"
-      - "7042:7042"
+      - "8443:8443"
     volumes:
       - ../../ocean:/home/bitcoin/.bitcoin
     command: >-
       oceand
-        -printtoconsole
+        -printtoall
         -chain=gold_main
         -rpcuser=${OCEAN_RPC_USER:-ocean}
         -rpcpassword=${OCEAN_RPC_PASS:-oceanpass}
-        -rpcport=8332
+        -rpcport=8443
         -rpcallowip=0.0.0.0/0
         -txindex=1
         -listen=1
@@ -53,4 +52,35 @@ services:
         -challengecoinsdestination=76a914c0b973a960a705286e91feb2cfd08111b65aa82988ac
         -minrelaytxfee=0.00000060
         -dustrelayfee=0.00000060
+        -attestationhash=862244710b778def8209ca90be7d697c686d595da4b90acdf6d2f844da1bfd28
+  ocean-cb:
+    image: commerceblock/ocean:24e5a20d4
+    networks:
+      - default
+    ports:
+      - "8332:8332"
+    volumes:
+      - ../../ocean-cb:/home/bitcoin/.bitcoin
+    command: >-
+      oceand
+        -printtoall
+        -chain=ocean_main
+        -rpcuser=${OCEAN_RPC_USER:-ocean}
+        -rpcpassword=${OCEAN_RPC_PASSWORD:-oceanpass}
+        -rpcport=8332
+        -rpcallowip=0.0.0.0/0
+        -addnode=mainnet.commerceblock.com
+        -txindex=1
+        -listen=1
+        -contractintx=1
+        -genesistimestamp=1579622400
+        -signblockscript=5321032caa3b3ffe62bc35bfe88d3d16ff652d7ec130c6b9f8f8798f6b296bb5a04c9c2103aa6a10881309f013ed3ba3b7ec574b5e5cbfed7a3f74aee88025091fd7f894242103a196d52a86b01e0efef9113bbb450f33ad2f371d28b9efe2ac54aace12a2618a2102a545598a08723ff8444808c7f78c69b8b582d05fdd99cf01c7f09dd0a47608f92103df492304aa104971312c8608c6373f7a945153522256d5bc3a79eb45ea68c20655ae
+        -con_mandatorycoinbase=76a9143e6b9f66eeb139c693cc8148285133a5ea96f66488ac
+        -initialfreecoins=0
+        -policycoins=2100000000000000
+        -permissioncoinsdestination=76a9149b45b5f6cfbf562e68c5af288dbafe1ac25605a388ac
+        -challengecoinsdestination=76a9145a0f7488e32c4c886773d0198448b7b03783e2b188ac
+        -parentgenesisblockhash=d4e56740f876aef8c010b86a40d5f56745a118d0906a34e69aec8c0db1cb8fa3
+        -parentcontract=076c97e1c869072ee22f8c91978c99b4bcb02591
+        -fedpegaddress=9178afdf2fc2cbdde30290c0b49f040ff804e06c
         -attestationhash=862244710b778def8209ca90be7d697c686d595da4b90acdf6d2f844da1bfd28
