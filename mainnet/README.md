@@ -46,7 +46,7 @@ docker-compose logs -f ocean-cb
 
 Interact with ocean node
 ```bash
-docker-compose exec ocean ocean-cli -rpcport=8332 -rpcuser=ocean -rpcpassword=oceanpass help
+docker-compose exec ocean-cb ocean-cli -rpcport=8332 -rpcuser=ocean -rpcpassword=oceanpass claimethpegin
 ```
 
 ### Method 2 - binaries
