@@ -1,18 +1,37 @@
-## Guardnode Service
+## DGLD mainnet
 
-Initiating a DGLD guarnode service requires running three different applications simultaneously:
+### Guardnodes
 
-- DGLD Ocean node ("ocean"): The node that is monitored by the guardnode and challenges are issued by the service coordinator.
+The DGLD guarnode service requires running three applications simultaneously:
 
-- CB Ocean node ("ocean-cb") : The node where all active requests are registed and the bidding happens on service auctions for DGLD.
+- *guardnode*
+    Daemon that automatically bids on active service auctions for DGLD that are issued on the CB chain. It connects to a DGLD node in order to monitor the chain and respond to challenges and to a CB node in order to do the bidding.
 
-- Guardnode daemon ("guardnode"): The daemon that automatically bids on active service auctions for DGLD, monitors the DGLD chain and responds to challenges.
+- *ocean*
+    DGLD node that connectes to the DGLD mainnet chain. The guardnode daemon queries this node for information.
 
-These three services can either be run using a single docker-compose file or by running each of these separately. Both of these methods are explained below. Note that the "guardnode" will require connectivity to both the DGLD and the CB node so these services should be accessible from each other if run on different machines.
+- *ocean-cb*
+    CB node that connecteds to the CB mainnet chain. The guardnode daemon queries this node for information.
 
-Note that the "ocean-cb" node needs to be funded with CBT in order to bid on a service auction. Information on how to do this can be read [here](https://commerceblock.readthedocs.io/en/latest/twowp/index.html), where all the RPC calls required should be done via the "ocean-cb" node.
+These three applications can either be run using a single docker-compose file or separately. Both of these methods are explained below. Note that the *guardnode* will require connectivity to both the DGLD *ocean* and the CB node *ocean-cb* so these services should be accessible from each other if run on different machines.
 
-### Method 1 - docker
+The following [video](https://www.youtube.com/watch?v=dWZwnl0IBe4) is a short guide on setting up a guardnode for DGLD.
+
+### KYC
+
+Receiving payments on a DGLD address will require that the guarnode operator is properly KYCed. In order to start this process follow the [link](https://dgld.ch/wallet-id).
+
+While for normal usage of DGLD an Electrum wallet would be required, in the guardnode case the registration file should be extracted from the *ocean* service. In order to do this the following command will have to be executed (after the "ocean" service is set up from the instructions below):
+
+`ocean-cli dumpkycfile REGISTRATION.dat`
+
+This file then needs to be imported to the form in the DGLD KYC application link above.
+
+### CBT peg-in
+
+Note that the *ocean-cb* node needs to be funded with CBT in order to bid on a service auction. Information on how to do this can be read [here](https://commerceblock.readthedocs.io/en/latest/twowp/index.html), where all the RPC calls required should be done via the "ocean-cb" node.
+
+### Method 1 - Docker
 
 0. Download and install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) following your system instructions, supported systems are: Linux, Windows, MacOS
 1. Clone this repo
