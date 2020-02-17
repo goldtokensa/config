@@ -13,13 +13,13 @@ services:
         --servicerpcuser ${OCEAN_RPC_USER:-ocean}
         --servicerpcpass ${OCEAN_RPC_PASSWORD:-oceanpass}
         --servicerpchost ocean-cb:8332
-        --bidlimit 1
+        --bidlimit ${GUARNODE_BID_LIMIT:-1}
         --challengehost https://coordinator.mainnet.gtsa.io:10007
         --nodelogfile /home/bitcoin/.bitcoin/gold_main/debug.log
     depends_on:
       - ocean
   ocean:
-    image: commerceblock/ocean:43242e91c
+    image: commerceblock/ocean:ef16ab2e6
     networks:
       - default
     ports:
@@ -39,6 +39,7 @@ services:
         -connect=mainnet.gtsa.io
         -contractintx=1
         -issuanceblock=1
+        -pkhwhitelist=1
         -fixedtxfee=50000
         -genesistimestamp=1568700000
         -policycoins=2100000000000000
@@ -54,7 +55,7 @@ services:
         -dustrelayfee=0.00000060
         -attestationhash=862244710b778def8209ca90be7d697c686d595da4b90acdf6d2f844da1bfd28
   ocean-cb:
-    image: commerceblock/ocean:24e5a20d4
+    image: commerceblock/ocean:ef16ab2e6
     networks:
       - default
     ports:
