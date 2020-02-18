@@ -40,13 +40,18 @@ Note that the *ocean-cb* node needs to be funded with CBT in order to bid on a s
 cd config/mainnet/docker/guardnode
 ```
 3. Edit docker-compose file if desired
-
-    _Edit the -bidlimit argument to control the max amount of CBT allowed to bid on a service auction._
-
 4. Start Ocean node alongside Guardnode
-```bash
-docker-compose up -d
-```
+    ```bash
+    docker-compose up -d
+    ```
+    or start ocean and ocean-cb
+    ```bash
+    docker-compose up -d ocean ocean-cb
+    ```
+    and start guardnode by overriding bid limit
+    ```bash
+    GUARNODE_BID_LIMIT=<CBT bid limit> docker-compose up -d guardnode
+    ```
 
 Follow guardnode logs
 ```bash
@@ -83,4 +88,7 @@ cd config/mainnet/binaries
 ```bash
 ./guardnode.sh
 ```
-*Edit the -bidlimit argument to control the max amount of CBT allowed to bid on a service auction.*
+or start guardnode by overriding bid limit
+```bash
+GUARNODE_BID_LIMIT=<CBT bid limit> ./guardnode.sh
+```
