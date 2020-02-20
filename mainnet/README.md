@@ -50,7 +50,7 @@ cd config/mainnet/docker/guardnode
     ```
     and start guardnode by overriding bid limit
     ```bash
-    GUARNODE_BID_LIMIT=<CBT bid limit> docker-compose up -d guardnode
+    GUARNODE_BID_LIMIT=<cbt-amount> docker-compose up -d guardnode
     ```
 
 Follow guardnode logs
@@ -90,5 +90,5 @@ cd config/mainnet/binaries
 ```
 or start guardnode by overriding bid limit
 ```bash
-GUARNODE_BID_LIMIT=<CBT bid limit> ./guardnode.sh
+GUARNODE_BID_LIMIT=<cbt-amount> ./guardnode.sh
 ```
