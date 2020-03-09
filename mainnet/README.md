@@ -92,3 +92,38 @@ or start guardnode by overriding bid limit
 ```bash
 GUARNODE_BID_LIMIT=<cbt-amount> ./guardnode.sh
 ```
+
+### Method 3 - AWS
+
+0. Create EC2 Instance profile. To create an EC2 instance profile follow this [link](https://docs.aws.amazon.com/blockchain-templates/latest/developerguide/blockchain-template-getting-started-prerequisites.html#blockchain-templates-iam-roles), only follow the sub-section of: **To create an EC2 instance profile**.
+1. Click any of the pre-set buttons to launch stack in AWS.
+
+| AWS Region | Short name | |
+| -- | -- | -- |
+| US East (Ohio) | us-east-2 | [![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-2#/stacks/new?stackName=Ocean&templateURL=https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml) |
+| US East (N. Virginia) | us-east-1 | [![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=Ocean&templateURL=https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml) |
+| US West (Oregon) | us-west-1 | [![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-1#/stacks/new?stackName=Ocean&templateURL=https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml) |
+| EU (London) | eu-west-2 | [![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=Ocean&templateURL=https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml) |
+| EU (Ireland) | eu-west-1 | [![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=Ocean&templateURL=https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml) |
+
+
+Or enter the following URL to CloudFormation new stack launch in your preferred region [link](https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml)
+
+2. After launching stack, connect to the node and check the status of the services:
+```bash
+$ docker service ls
+ID                  NAME                MODE                REPLICAS            IMAGE                            PORTS
+h5rdp88empdt        dgld_guardnode      replicated          1/1                 commerceblock/guardnode:latest   
+ju2ly4gjg4n1        dgld_ocean          replicated          1/1                 commerceblock/ocean:ef16ab2e6    *:8443->8443/tcp
+o87byle8rqs6        dgld_ocean-cb       replicated          1/1                 commerceblock/ocean:ef16ab2e6    *:8332->8332/tcp
+```
+3. To change GUARDNODE_BID_LIMIT, edit the variable in ```config/mainnet/docker/guardnode/docker-compose.yml```. Stop and start the service:
+```bash
+docker service rm dgld_guardnode
+docker stack deploy -c config/mainnet/docker/guardnode/docker-compose.yml dgld
+```
+To check the logs:
+```bash
+docker service logs -f {service_name}
+```
+Where *service name* is any of the following: dgld_guardnode, dgld_ocean, dgld_ocean-cb
