@@ -117,7 +117,16 @@ h5rdp88empdt        dgld_guardnode      replicated          1/1                 
 ju2ly4gjg4n1        dgld_ocean          replicated          1/1                 commerceblock/ocean:ef16ab2e6    *:8443->8443/tcp
 o87byle8rqs6        dgld_ocean-cb       replicated          1/1                 commerceblock/ocean:ef16ab2e6    *:8332->8332/tcp
 ```
-3. To change GUARDNODE_BID_LIMIT, edit the variable in ```config/mainnet/docker/guardnode/docker-compose.yml```. Stop and start the service:
+3. To change GUARNODE_BID_LIMIT, edit the variable in ```config/mainnet/docker/guardnode/docker-compose.yml```. In below command change variable **AMOUNT**. E.g:
+```bash
+sed -i 's/GUARNODE_BID_LIMIT:-1/GUARNODE_BID_LIMIT:-AMOUNT/g' config/mainnet/docker/guardnode/docker-compose.yml
+```
+To set to for example **1000**, do: 
+```bash
+sed -i 's/GUARNODE_BID_LIMIT:-1/GUARNODE_BID_LIMIT:-1000/g' config/mainnet/docker/guardnode/docker-compose.yml
+```
+
+4. Stop and start the service:
 ```bash
 docker service rm dgld_guardnode
 docker stack deploy -c config/mainnet/docker/guardnode/docker-compose.yml dgld
