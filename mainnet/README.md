@@ -131,7 +131,7 @@ sed -i 's/GUARNODE_BID_LIMIT:-1/GUARNODE_BID_LIMIT:-1000/g' config/mainnet/docke
 docker service rm dgld_guardnode
 docker stack deploy -c config/mainnet/docker/guardnode/docker-compose.yml dgld
 ```
-To check the logs:
+5. To check the logs:
 ```bash
 docker service logs -f {service_name}
 ```
