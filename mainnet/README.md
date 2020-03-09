@@ -107,7 +107,7 @@ GUARNODE_BID_LIMIT=<cbt-amount> ./guardnode.sh
 | EU (Ireland) | eu-west-1 | [![cloudformation-launch-button](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=Ocean&templateURL=https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml) |
 
 
-Or enter the following URL to CloudFormation new stack launch in your preferred region [link](https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml)
+Or enter the following [link](https://s3.eu-west-2.amazonaws.com/cb-awsocs/dgld/ocean-network.template.yaml) to CloudFormation new stack launch in your preferred region.
 
 2. After launching stack, connect to the node and check the status of the services:
 ```bash
