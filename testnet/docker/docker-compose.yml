@@ -2,7 +2,7 @@
 version: '3.6'
 services:
   public:
-    image: commerceblock/ocean:43242e91c
+    image: commerceblock/ocean:hardforkfeatures
     networks:
       - default
     ports:
@@ -42,4 +42,5 @@ services:
         -wallet=whitelistWallet.dat
         -attestationhash=db4479c0940eb27b42c02cfa56da64175b38d91015a981d234d1ac9c6a4e1215
         -fixedtxfee=50000
-
+        -signblockscriptchange=532103509c62d51979e0566a583681e59e948192126118e6215c99e46dec89b972adc82102399cf028b8601f80c6b1a090226308190e5c267d29986824d3b4f4af3be8ee9f2102226108c153873a4ae57af8efe1d105ca5d0c10e0c6e28a48cbb68b3518c201fd21037bbe4e9887b20fb3560104c3d9dbe137095e1b226d7fbed906b21ca95d30e1c0210226a89477521048d4515e5168eb9d6de551fd007543844bf4ea25fd657807106f55ae:148427
+        -disabledoutput=6524fa6634435d947e93b75e34d0178e90566ba170c6028e137c7c74167395f9:0
