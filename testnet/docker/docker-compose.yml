@@ -2,7 +2,7 @@
 version: '3.6'
 services:
   public:
-    image: commerceblock/ocean:hardforkfeatures
+    image: commerceblock/ocean:96f14fcf3
     networks:
       - default
     ports:
