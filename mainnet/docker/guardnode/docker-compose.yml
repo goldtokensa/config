@@ -19,7 +19,7 @@ services:
     depends_on:
       - ocean
   ocean:
-    image: commerceblock/ocean:ef16ab2e6
+    image: commerceblock/ocean:360c1e443
     networks:
       - default
     ports:
@@ -55,7 +55,7 @@ services:
         -dustrelayfee=0.00000060
         -attestationhash=862244710b778def8209ca90be7d697c686d595da4b90acdf6d2f844da1bfd28
   ocean-cb:
-    image: commerceblock/ocean:ef16ab2e6
+    image: commerceblock/ocean:360c1e443
     networks:
       - default
     ports:
